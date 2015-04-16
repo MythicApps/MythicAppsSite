@@ -38,7 +38,7 @@ class Hackathon(models.Model):
 
 class HackathonToApplicant(models.Model):
     hackathon = models.ForeignKey(Hackathon)
-    applicant = models.ForeignKey(Applicant)
+    applicant = models.ForeignKey("Applicant")
 
 class Applicant(models.Model):
     user = models.OneToOneField(UserType)
