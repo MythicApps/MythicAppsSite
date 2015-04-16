@@ -5,6 +5,7 @@ from General.models import Sponsor, Faq
 # Create your views here.
 def index(request):
     sponsors = []
+    
     for x in Sponsor.objects.all():
         print(x.toDictionary())
 

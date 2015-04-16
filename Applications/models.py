@@ -58,5 +58,5 @@ class Applicant(models.Model):
     website = models.CharField(max_length=100, blank=True, null=True)
     resume = models.FileField(blank=True,null=True)
     otherHackathons = models.BooleanField(default=False)
-
+    url = models.TextField()
 
