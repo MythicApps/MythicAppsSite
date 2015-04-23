@@ -8,7 +8,6 @@ def index(request):
     
     for x in Sponsor.objects.all():
         print(x.toDictionary())
-
         sponsors.append(x.toDictionary())
     faqs = []
     for x in Faq.objects.all():

@@ -6,3 +6,7 @@ from django.http import JsonResponse
 def create(request):
 
     return JsonResponse({})
+
+def createApplicant(request):
+
+    return JsonResponse()

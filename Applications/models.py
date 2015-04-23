@@ -13,6 +13,13 @@ class UserType(models.Model):
     phoneRegex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                 message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phoneNumber = models.CharField(validators=[phoneRegex], unique=True, max_length=10, blank=True, null=True)
+    idChoices = (
+        ("m", "Male"),
+        ("f", "Female"),
+        ("na","Prefer Not to Disclose")
+    )
+    deviceKey = models.TextField(blank=True, null=True) #Not used; for mobile phones
+    genderIdentity = models.CharField(max_length=2, choices = idChoices)
 
 class School(models.Model):
     name = models.CharField(max_length=100)
@@ -33,12 +40,24 @@ class TechToMentor(models.Model):
     mentor = models.ForeignKey(UserType)
     position = models.IntegerField(default=0)
 
+class TechToApplicant(models.Model):
+    tech = models.ForeignKey(Tech)
+    applicant = models.ForeignKey("Applicant")
+
 class Hackathon(models.Model):
+    name = models.CharField(max_length=100)
+
+class Hardware(models.Model):
     name = models.CharField(max_length=100)
 
 class HackathonToApplicant(models.Model):
     hackathon = models.ForeignKey(Hackathon)
     applicant = models.ForeignKey("Applicant")
+
+class HardwareToApplicant(models.Model):
+    hardware = models.ForeignKey(Hardware)
+    applicant = models.ForeignKey("Applicant")
+
 
 class Applicant(models.Model):
     user = models.OneToOneField(UserType)
@@ -52,11 +71,41 @@ class Applicant(models.Model):
                     ("GD","Graduate"),
                     ("OT","Other")
     )
+
     year = models.CharField(max_length=2,choices=year_choices)
     major = models.CharField(max_length=100)
     github = models.CharField(max_length=100, blank=True, null=True)
-    website = models.CharField(max_length=100, blank=True, null=True)
+    siteRegex =RegexValidator(regex=r'^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$',
+                              message="Not a proper website url")
+    website = models.CharField(max_length=100, blank=True, null=True, validators=[siteRegex])
+    linkedIn = models.CharField(max_length=200, blank=True, null=True, validators=[siteRegex])
     resume = models.FileField(blank=True,null=True)
     otherHackathons = models.BooleanField(default=False)
-    url = models.TextField()
-
+    dietary_choices = (
+        ('n','None'),
+        ('v',"Vegetarian"),
+        ('g', "Vegan"),
+        ("k", "Kosher"),
+        ("h", "Halal"),
+        ('o', "Other"),
+    )
+    applicationStatus_choices = (
+        ('r','Received'),
+        ('v',"Reviewed"),
+        ('a', "Accepted"),
+        ("w", "Wait list"),
+        ("d", "Declined"),d
+        ("f", "Flagged for Abuse"),
+    )
+    dietaryRestrictions = models.CharField(max_length=1, choices=dietary_choices)
+    otherDietaryRestrictions = models.TextField(blank=True, null=True)
+    applicationStatus = models.CharField(max_length=1, choices=applicationStatus_choices)
+    specialAccommodations = models.TextField(blank=True, null = True)
+    travel_choices = (
+        ('p','plane'),
+        ('t',"train"),
+        ('c', "car"),
+    )
+    travelMethod = models.CharField(max_length=1, choices=travel_choices)
+    travelingFrom = models.TextField()
+    needReimbursement = models.BooleanField(default=False)
