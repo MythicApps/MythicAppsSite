@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from General.views import index
+from General.views import index, login
 
 urlpatterns = [
     # Examples:
@@ -8,5 +8,6 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', index),
+    url(r'^users/login$', login),
 ]
 

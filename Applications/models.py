@@ -94,7 +94,7 @@ class Applicant(models.Model):
         ('v',"Reviewed"),
         ('a', "Accepted"),
         ("w", "Wait list"),
-        ("d", "Declined"),d
+        ("d", "Declined"),
         ("f", "Flagged for Abuse"),
     )
     dietaryRestrictions = models.CharField(max_length=1, choices=dietary_choices)
