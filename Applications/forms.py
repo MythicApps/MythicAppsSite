@@ -15,4 +15,16 @@ class UserTypeForm(ModelForm):
         model = UserType
         fields = ["wantsToMentor", "phoneNumber", "genderIdentity"]
 
+#CAW CAW
+    #ROAR
+# class ApplicantForm(forms.Form):
+#     DoB = forms.DateField()
+#     school = School()
+    #Name  !*
+
+#Date of Birth !
+#Phone number !
+#Email !*
+#Gender Identity !*
+#Where are you traveling from? *
 
