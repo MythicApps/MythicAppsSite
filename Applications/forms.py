@@ -15,6 +15,17 @@ class UserTypeForm(ModelForm):
         model = UserType
         fields = ["wantsToMentor", "phoneNumber", "genderIdentity"]
 
+class ApplicantForm(ModelForm):
+    freeResponse = forms.Textarea()
+    fields = ["DoB", "email", "genderIdentity", "schoolName",
+              "year", "major", "github", "website", "linkedIn",
+              "resume", "otherHackathons",
+              freeResponse,
+              "dietaryChoices","dietaryRestrictions",
+              "otherDietaryRestrictions","specialAccomodations",
+              "travelChoices", "travelMethod","travelingFrom",
+              "needReimbursement"]
+
 #CAW CAW
     #ROAR
 # class ApplicantForm(forms.Form):
