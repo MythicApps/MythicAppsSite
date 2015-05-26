@@ -79,6 +79,9 @@ def sponsorCreate(request):
 #Gender Identity !*
 #Where are you traveling from? *
 
+
+#always add the api_view decorator the functions.
+@api_view(["post"])
 @login_required
 def createApplicant(request):
     from django.contrib.auth.models import User
@@ -88,6 +91,9 @@ def createApplicant(request):
         if username.is_valid() and pw.is_valid():
             AppForm = ApplicantForm(request.POST)
             if AppForm.is_valid():
+                #To get the parameter, You need to specify it as an argument to request.POST.get
+                # Eg, request.POST.get('user') vs request.POST.get
+                # Also this may need to be the model. IDK. I'm not supper familliar with modelForm.
                 newApp = ApplicantForm(user = Applicant.user(request.POST.get),
                                        DoB = Applicant.DoB(request.POST.get),
                                        email = UserCreationForm.email(request.POST.get),
@@ -113,5 +119,6 @@ def createApplicant(request):
             else:
                 return JsonResponse({"Error":"Resource not available"},status=501)
         else:
+            #Edit for the errors for the Application form
             errors = {"user errors":userForm.errors, "user Type Errors":userTypeForm.errors}
             return JsonResponse(errors,status=406)
