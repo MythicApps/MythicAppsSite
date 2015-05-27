@@ -22,7 +22,7 @@ class UserType(models.Model):
     genderIdentity = models.CharField(max_length=2, choices = idChoices)
 
 class School(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     type = models.CharField(max_length=10)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -75,11 +75,11 @@ class Applicant(models.Model):
     year = models.CharField(max_length=2,choices=year_choices)
     major = models.CharField(max_length=100)
     github = models.CharField(max_length=100, blank=True, null=True)
-    siteRegex =RegexValidator(regex=r'^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$',
+    siteRegex = RegexValidator(regex=r'^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$',
                               message="Not a proper website url")
     website = models.CharField(max_length=100, blank=True, null=True, validators=[siteRegex])
     linkedIn = models.CharField(max_length=200, blank=True, null=True, validators=[siteRegex])
-    resume = models.FileField(blank=True,null=True)
+    resume = models.CharField(max_length=100,blank=True,null=True)
     otherHackathons = models.BooleanField(default=False)
     dietary_choices = (
         ('n','None'),
@@ -109,3 +109,4 @@ class Applicant(models.Model):
     travelMethod = models.CharField(max_length=1, choices=travel_choices)
     travelingFrom = models.TextField()
     needReimbursement = models.BooleanField(default=False)
+    freeResponce = models.TextField()

@@ -15,16 +15,16 @@ class UserTypeForm(ModelForm):
         model = UserType
         fields = ["wantsToMentor", "phoneNumber", "genderIdentity"]
 
-class ApplicantForm(ModelForm):
+class ApplicantForm(forms.Form):
     freeResponse = forms.Textarea()
-    fields = ["DoB", "email", "genderIdentity", "schoolName",
-              "year", "major", "github", "website", "linkedIn",
-              "resume", "otherHackathons",
-              freeResponse,
-              "dietaryChoices","dietaryRestrictions",
-              "otherDietaryRestrictions","specialAccomodations",
-              "travelChoices", "travelMethod","travelingFrom",
-              "needReimbursement"]
+    schoolName = forms.CharField()
+    isFirstHackathon = forms.BooleanField()
+    notFromSchool = forms.BooleanField()
+    resume = forms.CharField(required=False)
+    travelInfo = forms.Textarea()
+    github = forms.CharField(required=False)
+    linkedIn = forms.CharField(required=False)
+    personalSite = forms.CharField(required=False)
 
 #CAW CAW
     #ROAR
