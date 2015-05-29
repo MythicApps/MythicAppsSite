@@ -114,6 +114,8 @@ def createApplicant(request):
             newApplication.resume = request.POST.get("resume")
             newApplication.github = request.POST.get("github")
             newApplication.linkedIn = request.POST.get("linkedIn")
+            newApplication.linkedIn = request.POST.get("freeResp")
+            newApplication.linkedIn = request.POST.get("dribble")
             newApplication.website = request.POST.get("personalSite")
             newApplication.save()
             return JsonResponse({}, status=200)
