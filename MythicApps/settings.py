@@ -29,6 +29,8 @@ CORS_ORIGIN_ALLOW_ALL = DEBUG
 CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = []
 
+SESSION_COOKIE_DOMAIN = ".mythicapps.io"
+
 # Application definition
 
 INSTALLED_APPS = (
