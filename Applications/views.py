@@ -13,7 +13,7 @@ from rest_framework.decorators import api_view
 # Create your views here.
 
 @csrf_exempt
-@api_view(["post"])
+@api_view(["POST"])
 def create(request):
     from django.contrib.auth.models import User
     if request.method == "POST":

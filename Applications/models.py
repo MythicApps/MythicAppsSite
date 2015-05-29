@@ -110,3 +110,4 @@ class Applicant(models.Model):
     travelingFrom = models.TextField()
     needReimbursement = models.BooleanField(default=False)
     freeResponce = models.TextField()
+    dribble = models.CharField(max_length=200, blank=True, null=True)
