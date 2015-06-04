@@ -8,7 +8,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', index),
-    url(r'^users/login$', login),
-    url(r'^get/csrftoken', fuckingCSRF),
+    url(r'^login/', login),
+    url(r'csrftoken/$', fuckingCSRF),
 ]
 

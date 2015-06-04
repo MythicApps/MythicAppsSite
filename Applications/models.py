@@ -21,12 +21,18 @@ class UserType(models.Model):
     deviceKey = models.TextField(blank=True, null=True) #Not used; for mobile phones
     genderIdentity = models.CharField(max_length=2, choices = idChoices)
 
+    def __str__(self):
+        return "{0} {1}".format(self.user.first_name, self.user.last_name)
+
 class School(models.Model):
     name = models.CharField(max_length=100, unique=True)
     type = models.CharField(max_length=10)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class SchoolAbbreviations(models.Model):
     abbr = models.CharField(max_length=50)
@@ -61,7 +67,7 @@ class HardwareToApplicant(models.Model):
 
 class Applicant(models.Model):
     user = models.OneToOneField(UserType)
-    DoB = models.DateField()
+    DoB = models.DateField(null=True)
     school = models.ForeignKey(School)
     year_choices = (("FR","Freshman"),
                     ("SP","Sophomore"),

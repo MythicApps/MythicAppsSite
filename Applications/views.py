@@ -89,13 +89,13 @@ def getSchool(schoolName):
             skool = SchoolAbbreviations.objects.get(abbr = schoolName)
         except:
             skool = School(name = schoolName, type = "college", city = "east lansing", state = "Mi", country = "USA")
+    skool.save()
     return skool
 
 #always add the api_view decorator the functions.
 
 @api_view(["POST"])
 @login_required
-@csrf_exempt
 def createApplicant(request):
     from django.contrib.auth.models import User
     if request.method == "POST":
@@ -109,14 +109,19 @@ def createApplicant(request):
             school = getSchool(request.POST.get("schoolName"))
             if(not request.POST.get("notFromSchool")):
                 newApplication.travelingFrom = request.POST.get("travelInfo")
+            else:
+                newApplication.travelingFrom = "{0}, {1} {2}".format(school.city, school.state, school.country)
+
             newApplication.school = school
             newApplication.otherHackathons = request.POST.get("isFirstHackathon")
+            print(request.POST)
             newApplication.resume = request.POST.get("resume")
             newApplication.github = request.POST.get("github")
             newApplication.linkedIn = request.POST.get("linkedIn")
             newApplication.linkedIn = request.POST.get("freeResp")
             newApplication.linkedIn = request.POST.get("dribble")
             newApplication.website = request.POST.get("personalSite")
+            newApplication.freeResponce = request.POST.get("freeResponse")
             newApplication.save()
             return JsonResponse({}, status=200)
             pass

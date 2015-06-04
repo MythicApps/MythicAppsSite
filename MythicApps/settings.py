@@ -30,6 +30,7 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = []
 
 SESSION_COOKIE_DOMAIN = ".mythicapps.io"
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
